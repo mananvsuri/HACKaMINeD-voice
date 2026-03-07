@@ -5,6 +5,7 @@ import VoiceCopilot from './pages/VoiceCopilot';
 import OrderHistory from './pages/OrderHistory';
 import CallCopilot from './pages/CallCopilot';
 import Sidebar from './components/Sidebar';
+import CustomCursor from './components/CustomCursor';
 import './index.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            <CustomCursor />
             <div className="app-layout">
                 <Sidebar theme={theme} toggleTheme={toggleTheme} />
                 <main className="main-content">

@@ -1,45 +1,46 @@
 :root {
-    --primary: #9d4edd;
-    --primary-dark: #7b2cbf;
-    --secondary: #ff9e00;
-    --background: #0f1016;
-    --surface: #1e1e24;
-    --surface-light: #2b2b36;
-    --text: #f8f9fa;
-    --text-muted: #adb5bd;
-    --danger: #ef233c;
-    --success: #06d6a0;
-    --font-family: 'Outfit', sans-serif;
+    --primary: #2563EB;
+    --primary-dark: #1D4ED8;
+    --secondary: #0ea5e9;
+    --background: #09090b;
+    --surface: #18181b;
+    --surface-light: #27272a;
+    --text: #fafafa;
+    --text-muted: #a1a1aa;
+    --danger: #ef4444;
+    --success: #10b981;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
 
-    --glass-bg: rgba(30, 30, 36, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-shadow: rgba(0, 0, 0, 0.25);
-    --glass-shadow-hover: rgba(157, 78, 221, 0.15);
+    --panel-bg: #18181b;
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --panel-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+    --panel-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
 
-    --nav-hover-bg: rgba(255, 255, 255, 0.03);
-    --kpi-text-gradient: linear-gradient(90deg, #fff, #aaa);
+    --nav-hover-bg: rgba(255, 255, 255, 0.05);
+    --kpi-text-gradient: linear-gradient(180deg, #fff, #a1a1aa);
 }
 
 [data-theme="light"] {
-    --background: #f4f6f8;
+    --background: #fafafa;
     --surface: #ffffff;
-    --surface-light: #f0f0f5;
-    --text: #1a1a24;
-    --text-muted: #6b7280;
+    --surface-light: #f4f4f5;
+    --text: #09090b;
+    --text-muted: #71717a;
 
-    --glass-bg: rgba(255, 255, 255, 0.65);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: rgba(0, 0, 0, 0.05);
-    --glass-shadow-hover: rgba(157, 78, 221, 0.2);
+    --panel-bg: #ffffff;
+    --panel-border: rgba(0, 0, 0, 0.06);
+    --panel-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+    --panel-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
 
     --nav-hover-bg: rgba(0, 0, 0, 0.04);
-    --kpi-text-gradient: linear-gradient(90deg, #1a1a24, #6b7280);
+    --kpi-text-gradient: linear-gradient(180deg, #09090b, #71717a);
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    cursor: none !important;
 }
 
 body {
@@ -47,11 +48,9 @@ body {
     background-color: var(--background);
     color: var(--text);
     overflow-x: hidden;
-    transition: background-color 0.4s ease, color 0.4s ease;
-    background-image:
-        radial-gradient(circle at 15% 50%, rgba(157, 78, 221, 0.08), transparent 30%),
-        radial-gradient(circle at 85% 30%, rgba(255, 158, 0, 0.05), transparent 30%);
-    background-attachment: fixed;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .app-layout {
@@ -121,9 +120,10 @@ body {
 }
 
 .nav-item.active {
-    background: linear-gradient(90deg, rgba(157, 78, 221, 0.15), transparent);
-    color: var(--primary);
-    border-right: 3px solid var(--primary);
+    background-color: var(--surface-light);
+    color: var(--text);
+    border-left: 3px solid var(--primary);
+    border-radius: 4px 8px 8px 4px;
 }
 
 .sidebar-footer {
@@ -140,22 +140,19 @@ body {
     background: var(--background);
 }
 
-/* Glassmorphism Classes */
+/* Panel Classes */
 .glass-panel {
-    background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 8px 32px 0 var(--glass-shadow);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+    box-shadow: var(--panel-shadow);
+    transition: all 0.2s ease;
 }
 
 .glass-panel:hover {
-    transform: translateY(-4px);
-    border-color: rgba(157, 78, 221, 0.4);
-    box-shadow: 0 12px 40px 0 var(--glass-shadow-hover);
+    border-color: rgba(161, 161, 170, 0.2);
+    box-shadow: var(--panel-shadow-hover);
 }
 
 .kpi-value {
