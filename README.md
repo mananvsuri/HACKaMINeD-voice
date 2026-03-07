@@ -123,4 +123,4 @@ npm run dev
 ```
 
 ---
-*Developed for the Petpooja Hackathon by Manan Suri.*
+*Developed for the Hackamined Petpooja Hackathon by Manan Suri, Dhaval Khandelwal and Sambhav Jain.*
