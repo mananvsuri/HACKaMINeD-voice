@@ -1,106 +1,97 @@
-# AI-Powered Revenue & Voice Copilot for Restaurants
+# HACKaMINeD Voice & Revenue Copilot
 
-This project is a full-stack platform designed for restaurants to optimize their menu profitability and automate order-taking using an AI-powered voice assistant. Built with **FastAPI** (Backend) and **React + Vite** (Frontend), and powered by **Groq**'s ultra-fast AI inference platform.
+An AI-powered Point-of-Sale (POS) Copilot and Advanced Revenue Analytics Dashboard built for the Petpooja Hackathon. This project transforms standard restaurant operations by integrating voice-driven ordering, intelligent upsells, and predictive revenue tools.
 
-## Features
+## 🚀 Key Innovation Features (Hackathon Focus)
 
-### 1. Revenue Intelligence Engine
-- **Item-Level Profitability Analysis**: Calculates Contribution Margin (Selling Price – Food Cost).
-- **Sales Velocity vs Margin Classification**: 
-  - Detect high-margin but under-promoted items (Action: Upsell/Promote).
-  - Detect low-margin high-volume items (Action: Reprice/Portion Control).
-  - Identifies "Star" and "Dog" items.
-- **Smart Combo Recommendations**: Uses association rule mining (frequent itemsets) to suggest intelligent combos, increasing Average Order Value (AOV).
+1. **AI Voice & Call Simulator (`/api/voice/conversation`)**
+   - **Continuous Conversational AI**: Replaces traditional walk-in and phone orders with a LLaMA 3.3 powered intelligent agent.
+   - **Contextual Memory**: The AI remembers the running cart, handles modifications, and answers questions accurately across multi-turn conversations.
+   - **Automated Upselling**: Intelligently recommends high-margin items during the call based on the customer's current cart.
 
-### 2. AI Voice Ordering Copilot
-- **Natural Language Voice Capture**: Multilingual support (English, Hindi, Hinglish) via **Groq Whisper API**.
-- **Intent Recognition & Parsing**: Uses **Groq LLaMA 3 (70B)** to parse fuzzy natural language voice transcripts into a clean, structured JSON order schema.
-- **Live Cart Interface**: Watch the AI populate the PoS cart in real-time as the user speaks, handling modifiers (e.g., "extra spicy", "no onions").
+2. **Advanced Revenue Intelligence Engine**
+   - **The Menu Matrix**: Analyzes thousands of historical data points to classify menu items into industry-standard profitability categories: Stars, Plowhorses, Puzzles, and Dogs.
+   - **Smart Combos**: Uses association rule algorithms to automatically suggest the most profitable combo offerings based on real ordering behaviors.
 
----
-
-## Project Structure
-- `backend/` - FastAPI python application, SQLite database, and AI service logic.
-- `frontend/` - React application utilizing Vite, Recharts, and a custom CSS glassmorphism UI.
+3. **Petpooja Ecosystem Integrations (Phase 15 Features)**
+   - **AI Marketing Campaign Generator**: Single-click "WhatsApp Promo" generation to boost sales for *Puzzle* items (High Margin / Low Volume).
+   - **Predictive Inventory & Smart Stock Alerts**: Calculates live sales velocity to predict raw material stock-outs (e.g., "Butter Chicken depletes in 2 days"). Integrates a mock 1-click "Petpooja Supplier Hub Restock".
+   - **Dynamic Surge Pricing**: Real-time pricing toggle to slightly increase prices (+5%) on *Plowhorse* items (Low Margin / High Volume) during peak operational hours.
 
 ---
 
-## 🚀 Setup & Installation Guide
+## 🛠️ Technology Stack
+
+* **Frontend**: React, Vite, Recharts, Lucide-React, Web Speech API (for TTS and Speech Recognition).
+* **Backend**: FastAPI (Python), SQLAlchemy, SQLite, Uvicorn.
+* **AI & LLM**: Groq Cloud API, LLaMA 3.3 70B Versatile.
+
+---
+
+## ⚙️ Build and Installation
 
 ### Prerequisites
-- Python 3.9+
-- Node.js 18+
-- A valid **GROQ API Key** (Get yours at [console.groq.com](https://console.groq.com))
+- Python 3.10+
+- Node.js & npm
+- A Groq API Key
 
-### 1. Backend Setup (FastAPI + Groq)
+### 1. Setup the Backend
+Navigate to the backend directory, install dependencies, and run the database seeder to inject the mock Indian menu and 250 test orders.
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
+```bash
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 
-2. Create and activate a Virtual Environment:
-   ```bash
-   # On Mac/Linux
-   python3 -m venv venv
-   source venv/bin/activate
-   
-   # On Windows
-   # python -m venv venv
-   # venv\Scripts\activate
-   ```
+# Run the DB seed script to generate menu analytics
+python seed.py
 
-3. Install the dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-   *(If `requirements.txt` is missing, run: `pip install fastapi uvicorn sqlite-utils sqlalchemy pydantic groq python-dotenv python-multipart`)*
+# Create a .env file and add your Groq API Key
+echo "GROQ_API_KEY=your_api_key_here" > .env
 
-4. **Configure Environment Variables**:
-   Create a `.env` file in the `backend/` directory and add your Groq API key:
-   ```text
-   GROQ_API_KEY=your_groq_api_key_here
-   ```
+# Start the FastAPI server
+uvicorn main:app --reload
+```
+*The backend will be running at http://localhost:8000*
 
-5. **Seed the Database** (to power the Revenue intelligence):
-   Run the seed script to generate mock menu items and transactional data:
-   ```bash
-   python seed.py
-   ```
+### 2. Setup the Frontend
+Navigate to the frontend directory, install the packages, and run the Vite server.
 
-6. **Start the Backend Server**:
-   ```bash
-   uvicorn main:app --reload
-   ```
-   The backend will start at `http://localhost:8000`.
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*The React app will be running at http://localhost:5173*
 
 ---
 
-### 2. Frontend Setup (React + Vite)
+## 🎨 System Walkthrough
 
-Open a **new terminal window**.
+* **Dashboard (Revenue Engine)**: View the interactive scatter plot categorizing your items. Check the Right sidebar for real-time AI Alerts regarding low stock and marketing opportunities.
+* **Walk-In Copilot**: Click the microphone to simulate a POS kiosk receiving a verbal order.
+* **Simulate Call**: A multi-turn conversational simulator. Let the browser speak to you, and respond back using the microphone to build an order progressively.
+* **Order History**: A complete log of all completed transactions processed by the AI.
 
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
+## 📁 Repository Structure
 
-2. Install Node dependencies:
-   ```bash
-   npm install
-   ```
-
-3. **Start the Frontend Development Server**:
-   ```bash
-   npm run dev
-   ```
-   The frontend will start on `http://localhost:5173` (or the port Vite provides). Open this URL in your browser.
+```
+├── backend/
+│   ├── core/
+│   │   ├── database.py   # SQLAlchemy setup
+│   │   ├── models.py     # SQLite schema definitions
+│   │   └── schemas.py    # Pydantic validation models
+│   ├── routers/          # FastAPI endpoint routes
+│   ├── services/         # Business logic (Groq API, Revenue Math)
+│   ├── main.py           # App Entrypoint
+│   └── seed.py           # Analytics data generator
+└── frontend/
+    └── src/
+        ├── api/          # Axios API client functions
+        ├── components/   # Reusable UI elements
+        └── pages/        # Dashboard, Copilots, etc.
+```
 
 ---
-
-## How to Test the Flow
-
-1. **Dashboard**: Navigate to `http://localhost:5173/` to interact with the Profitability Matrix and see the dynamically generated AI combos.
-2. **Voice Copilot**: Navigate to `http://localhost:5173/voice`. Click the beautiful animated microphone icon, allow microphone permissions, and speak a natural order! 
-   - *Example (Hinglish)*: "Mujhe ek butter chicken aur do garlic naan chahiye, make the chicken extra spicy".
-   - The AI will process this over the backend and populate the cart automatically.
+*Developed for the Petpooja Hackathon by Manan Suri.*
