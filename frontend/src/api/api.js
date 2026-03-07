@@ -20,11 +20,7 @@ export const submitAudioOrder = async (audioBlob, currentCart = []) => {
     formData.append('audio', audioBlob, 'order.webm');
     formData.append('current_cart', JSON.stringify(currentCart));
 
-    const response = await api.post('/voice/order', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+    const response = await api.post('/voice/order', formData);
     return response.data;
 };
 
@@ -49,11 +45,7 @@ export const submitConversationTurn = async (audioBlob, chatHistory, currentCart
     formData.append('chat_history', JSON.stringify(chatHistory));
     formData.append('current_cart', JSON.stringify(currentCart));
 
-    const response = await api.post('/voice/conversation', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    });
+    const response = await api.post('/voice/conversation', formData);
     return response.data;
 };
 
